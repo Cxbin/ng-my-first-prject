@@ -1,0 +1,5 @@
+<p>todolist案例</p>
+
+<app-todo-header (add)="addTodo($event)"></app-todo-header>
+
+<app-todo-list (change)="exchangeDoneFlag($event)" (del)="delTodo($event)" [todos]="todos"></app-todo-list>

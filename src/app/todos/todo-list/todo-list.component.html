@@ -1,0 +1,6 @@
+<ul>
+  <li class="todo-li" *ngFor="let item of todos; trackBy:trackByTodos">
+    <span class="todo-content" [class.done]="item.done"
+      (click)="exchangeDoneFlag(item.id)">{{ item.name }}--{{item.id}}</span>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a (click)="delTodo(item.id)">x</a></li>
+</ul>
