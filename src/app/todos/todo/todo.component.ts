@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TodosService } from '../todos.service';
-//接口
-interface Todo {
-  id: number,
-  name: string,
-  done: boolean
-}
+
+import { Todo } from '../todo';
 
 @Component({
   selector: 'app-todo',
@@ -22,41 +18,17 @@ export class TodoComponent implements OnInit {
   ngOnInit() {
   }
 
-  todos: Todo[] = [
-    { id: 1, name: '吃饭', done: false },
-    { id: 2, name: '睡觉', done: true },
-    { id: 3, name: '学习', done: false },
-  ];
+  todos: Todo[] = this.todoService.getTodos();
 
   exchangeDoneFlag(id: number) {
-    console.log('11111' + id);
-    let todo = this.todos.find(todo => todo.id === id);
-    todo.done = !todo.done;
+    this.todoService.change(id);
   };
   delTodo(id: number) {
-    this.todos = this.todos.filter(todo => todo.id !== id);
+    this.todoService.del(id);
   };
 
   addTodo(todoName: string) {
-
-    //调用服务
-    this.todoService.todoTest();
-
-    let id = 0;
-
-    if (this.todos.length > 0) {
-      id = this.todos[this.todos.length - 1].id + 1;
-    }
-
-    let todo: Todo = {
-      id: id,
-      name: todoName,
-      done: false
-    }
-
-    this.todos.push(todo);
+    this.todoService.add(todoName); 
   }
-
-
 
 }
